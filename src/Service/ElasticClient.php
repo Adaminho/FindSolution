@@ -8,44 +8,62 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class ElasticClient
 {
-    const ALLOWED_API_METHODS = [
-        'GET',
-        'PUT',
-        'POST',
-        'UPDATE',
-        'DELETE'
-    ];
+    private $elasticsearchAddress;
+    private $elasticsearchPort;
 
-    public function sendGet($query, $uri)
+    public function __construct($elasticsearchAddress, $elasticsearchPort)
+    {
+        $this->elasticsearchAddress = $elasticsearchAddress;
+        $this->elasticsearchPort = $elasticsearchPort;
+    }
+
+    public function sendGet($query, $uri) : string
     {
         return $this->_send($query, $uri, 'GET');
     }
 
-    public function sendPut($query, $uri)
+    public function sendPut($query, $uri) : string
     {
         return $this->_send($query, $uri, 'PUT');
     }
 
-    public function sendPost($query, $uri)
+    public function sendPost($query, $uri) : string
     {
         return $this->_send($query, $uri, 'POST');
     }
 
-    public function sendUpdate($query, $uri)
+    public function sendUpdate($query, $uri) : string
     {
         return $this->_send($query, $uri, 'UPDATE');
     }
 
-    public function sendDelete($query, $uri)
+    public function sendDelete($query, $uri) : string
     {
         return $this->_send($query, $uri, 'DELETE');
     }
 
-    protected function _send($query, $uri, $method)
+    protected function _send($query, $uri, $method) : string
     {
-        $response = '';
-        return $response;
+        $uri = 'http://' . $this->elasticsearchAddress . ':' . $this->elasticsearchPort . '/' . $uri;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $uri);
+        curl_setopt($curl,CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        if ($query) {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($query));
+        }
+
+        $result = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $result;
     }
 }

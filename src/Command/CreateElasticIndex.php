@@ -11,9 +11,21 @@ namespace App\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use App\Service\ElasticClient;
+
 
 class CreateElasticIndex extends Command
 {
+    private $elasticClient;
+
+    public function __construct(ElasticClient $elasticClient)
+    {
+        $this->elasticClient = $elasticClient;
+
+        parent::__construct();
+
+    }
+
     protected function configure()
     {
         $this
@@ -24,7 +36,12 @@ class CreateElasticIndex extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
+        $this->_createSolutionIndex();
     }
 
+    protected function _createSolutionIndex()
+    {
+        $uri = 'solution';
+        $this->elasticClient->sendPut('', $uri);
+    }
 }
