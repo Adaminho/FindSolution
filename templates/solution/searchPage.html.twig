@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form method="post" id="find-solution-form" name="findSolutionForm" data-action="">
+    <input name="findSolution" id="find-solution-input">
+    <select name="findSolutionSelect" id="find-solution-select">
+        <option>Wybierz</option>
+        <option value="magento_1">Magento 1</option>
+        <option value="magento_2">Magento 2</option>
+        <option value="symfony">Symfony</option>
+        <option value="pimcore">Pimcore</option>
+        <option value="linux">Linux</option>
+        <option value="windows">Windows</option>
+        <option value="inne">Inne</option>
+    </select>
+    <button type="submit" id="find-solution-button">Szukaj</button>
+</form>
+{% endblock %}
