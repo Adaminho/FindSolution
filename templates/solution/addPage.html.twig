@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<form method="post" name="add-solution-form" id="addSolutionForm">
+<form method="post" name="add-solution-form" id="addSolutionForm" action="/add">
     <label for="add-solution-title">Tytuł:</label><input id="add-solution-title" type="text" name="title">
     <label for="add-solution-description">Opis:</label>
     <textarea id="add-solution-description" type="text" name="description"></textarea>
     <label for="add-solution-type">Typ:</label>
-    <select name="add-solution-type" id="add-solution-select">
+    <select name="type" id="add-solution-select">
         <option>Wybierz</option>
         <option value="magento_1">Magento 1</option>
         <option value="magento_2">Magento 2</option>
