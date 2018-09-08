@@ -30,4 +30,18 @@ class SolutionController extends AbstractController
     {
         return $this->render('solution/addPage.html.twig');
     }
+
+    /**
+     * @Route("/add")
+     */
+    public function add(Request $request)
+    {
+        $title = description = $request->request->get('description');
+        $description         = $request->request->get('description');
+        $type                = $request->request->get('type');
+
+
+
+        return $this->render('solution/addPage.html.twig');
+    }
 }
