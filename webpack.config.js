@@ -2,7 +2,6 @@ var Encore = require('@symfony/webpack-encore');
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
@@ -17,7 +16,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    // .addEntry('app', './assets/js/app.js')
+    .addEntry('indexPage', './assets/index.jsx')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -33,6 +33,7 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
+    .enableReactPreset()
 
     // enables Sass/SCSS support
     //.enableSassLoader()

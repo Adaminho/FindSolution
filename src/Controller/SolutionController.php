@@ -15,13 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SolutionController extends AbstractController
 {
-    /**
-     * @Route("/")
-     */
-    public function index()
-    {
-        return $this->render("solution/searchPage.html.twig");
-    }
+//    /**
+//     * @Route("/")
+//     */
+//    public function index()
+//    {
+//        return $this->render("solution/searchPage.html.twig");
+//    }
 
     /**
      * @Route("/addSolution")
@@ -36,7 +36,7 @@ class SolutionController extends AbstractController
      */
     public function add(Request $request)
     {
-        $title = description = $request->request->get('description');
+        $title  = $request->request->get('description');
         $description         = $request->request->get('description');
         $type                = $request->request->get('type');
 
@@ -44,4 +44,13 @@ class SolutionController extends AbstractController
 
         return $this->render('solution/addPage.html.twig');
     }
+
+    /**
+     * @Route ("/", name="app")
+     */
+    public function index()
+    {
+        return $this->render('base.html.twig');
+    }
+
 }
